@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Derecho de los Contratos · Kennedy 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bordo:     #6B0F2B;
+      --bordo-dk:  #4A0A1E;
+      --bordo-lt:  #8C1535;
+      --gold:      #C9A84C;
+      --gold-lt:   #E8C97A;
+      --cream:     #FAF6F0;
+      --white:     #FFFFFF;
+      --gray:      #6B6B6B;
+      --lgray:     #E8E2DA;
+      --text:      #1A1010;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ────────────────────────────────────────────────── */
+    header {
+      background: var(--bordo-dk);
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .header-bg-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,.02) 40px, rgba(255,255,255,.02) 41px),
+        repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,.02) 40px, rgba(255,255,255,.02) 41px);
+    }
+
+    .header-gold-bar {
+      height: 5px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold));
+    }
+
+    .header-inner {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 52px 40px 48px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .header-left {}
+
+    .header-tag {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,.4);
+      padding: 4px 12px;
+      margin-bottom: 18px;
+    }
+
+    .header-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .header-title em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+
+    .header-subtitle {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,.55);
+      letter-spacing: .5px;
+    }
+
+    .header-meta {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .header-meta-item {
+      font-size: 11px;
+      color: rgba(255,255,255,.45);
+      font-weight: 300;
+      letter-spacing: .4px;
+      line-height: 2;
+    }
+
+    .header-meta-item strong {
+      color: rgba(255,255,255,.8);
+      font-weight: 500;
+    }
+
+    /* ── NAV ────────────────────────────────────────────────────── */
+    nav {
+      background: var(--bordo);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      gap: 0;
+    }
+
+    .nav-inner a {
+      display: block;
+      padding: 14px 18px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.6);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+
+    .nav-inner a:hover,
+    .nav-inner a.active {
+      color: var(--gold-lt);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── MAIN ────────────────────────────────────────────────────── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 52px 40px 80px;
+    }
+
+    section { margin-bottom: 64px; }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--bordo);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--bordo) 0%, transparent 100%);
+      opacity: .25;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--gray);
+      letter-spacing: .5px;
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
+
+    /* ── CLASSES GRID ───────────────────────────────────────────── */
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 18px;
+    }
+
+    .class-card {
+      background: var(--white);
+      border: 1px solid var(--lgray);
+      border-left: 4px solid var(--bordo);
+      padding: 22px 22px 18px;
+      transition: box-shadow .2s, transform .2s, border-left-color .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .class-card:hover {
+      box-shadow: 0 6px 24px rgba(107,15,43,.12);
+      transform: translateY(-2px);
+      border-left-color: var(--gold);
+    }
+
+    .class-card.available { cursor: default; }
+    .class-card.upcoming { opacity: .72; }
+    .class-card.special { border-left-color: var(--gold); background: #FDF9F0; }
+    .class-card.exam { border-left-color: var(--bordo-dk); background: #FDF0F3; }
+    .class-card.holiday { border-left-color: var(--lgray); background: #F8F8F8; opacity: .6; }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+
+    .card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--bordo);
+      line-height: 1;
+      opacity: .18;
+      flex-shrink: 0;
+    }
+
+    .card-date {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .8px;
+      color: var(--gray);
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 2px;
+      margin-top: 4px;
+    }
+
+    .badge-available { background: #EDF7ED; color: #2A7A2A; }
+    .badge-upcoming  { background: #F0F0F0; color: #888; }
+    .badge-exam      { background: #FDEEF1; color: var(--bordo); }
+    .badge-holiday   { background: #F0F0F0; color: #888; }
+    .badge-special   { background: #FEF8E6; color: #8A6000; }
+
+    .card-module {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--bordo-lt);
+      margin-bottom: 6px;
+    }
+
+    .card-topic {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .card-contents {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .card-actions {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--lgray);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      text-decoration: none;
+      transition: background .2s, color .2s, transform .15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--bordo);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background: var(--bordo-lt);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--bordo);
+      border: 1px solid var(--bordo);
+    }
+    .btn-secondary:hover {
+      background: var(--bordo);
+      color: var(--white);
+    }
+
+    .btn svg {
+      width: 12px; height: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ── CRONOGRAMA TABLE ───────────────────────────────────────── */
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .schedule-table th {
+      background: var(--bordo);
+      color: var(--white);
+      font-weight: 500;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      font-size: 10px;
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    .schedule-table td {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--lgray);
+      vertical-align: top;
+      color: var(--text);
+      font-weight: 300;
+    }
+
+    .schedule-table tr:hover td { background: rgba(107,15,43,.03); }
+
+    .schedule-table td.num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--bordo);
+      opacity: .5;
+      width: 40px;
+    }
+
+    .schedule-table td.fecha {
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray);
+      width: 120px;
+    }
+
+    .schedule-table td.modulo {
+      font-size: 11px;
+      color: var(--bordo-lt);
+      font-weight: 600;
+      white-space: nowrap;
+      width: 90px;
+    }
+
+    .schedule-table tr.exam-row td { background: #FDF0F3; }
+    .schedule-table tr.holiday-row td { background: #F8F8F8; color: #aaa; }
+    .schedule-table tr.special-row td { background: #FDF9F0; }
+
+    /* ── INFO CARDS ─────────────────────────────────────────────── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .info-card {
+      background: var(--white);
+      border: 1px solid var(--lgray);
+      padding: 20px;
+    }
+
+    .info-card-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .info-card-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--bordo-dk);
+      line-height: 1.4;
+    }
+
+    .info-card-note {
+      font-size: 11px;
+      color: var(--gray);
+      margin-top: 4px;
+      font-weight: 300;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      background: var(--bordo-dk);
+      color: rgba(255,255,255,.45);
+      text-align: center;
+      padding: 28px 40px;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: .5px;
+    }
+
+    footer strong { color: rgba(255,255,255,.75); font-weight: 500; }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 680px) {
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      .header-meta { text-align: left; }
+      main { padding: 36px 20px 60px; }
+      .nav-inner { padding: 0 16px; overflow-x: auto; }
+      .schedule-table { font-size: 11px; }
+      .schedule-table td.modulo { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-bg-pattern"></div>
+  <div class="header-gold-bar"></div>
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-tag">Universidad Kennedy · 2026</div>
+      <h1 class="header-title">Derecho de los<br><em>Contratos</em></h1>
+      <p class="header-subtitle">Maximiliano Lucas Romei · Cátedra 2026</p>
+    </div>
+    <div class="header-meta">
+      <div class="header-meta-item"><strong>15 unidades</strong> · 4 módulos</div>
+      <div class="header-meta-item">Lunes · 4 módulos cátedra</div>
+      <div class="header-meta-item">1° Parcial <strong>18/05/2026</strong></div>
+      <div class="header-meta-item">2° Parcial <strong>06/07/2026</strong></div>
+      <div class="header-meta-item">Final <strong>desde 20/07/2026</strong></div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#clases" class="active">Clases</a>
+    <a href="#cronograma">Cronograma</a>
+    <a href="#info">Información</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ── CLASES ─────────────────────────────────────────────────── -->
+  <section id="clases">
+    <h2 class="section-title">Material de Clases</h2>
+    <p class="section-subtitle">Las presentaciones se publican antes de cada clase. Hacé clic en "Ver presentación" para acceder.</p>
+
+    <div class="classes-grid">
+
+      <!-- CLASE 1 -->
+      <div class="class-card available">
+        <div class="card-header">
+          <span class="card-num">01</span>
+          <div>
+            <div class="card-date">06 · 04 · 2026</div>
+            <span class="card-badge badge-available">Disponible</span>
+          </div>
+        </div>
+        <div class="card-module">M1 · U1</div>
+        <div class="card-topic">Concepto y Clasificación del Contrato</div>
+        <div class="card-contents">Concepto (art. 957 CCyCN) · Contrato, ley y sentencia · Autonomía de la voluntad y sus límites · Unificación civil-comercial · Clasificación de los contratos</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://docs.google.com/presentation/d/1wvRfxys7Y6cnu0BQIDaeB3i0DyHCMicU/edit?usp=sharing" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3H19A2 2 0 0121 5V19A2 2 0 0119 21H5A2 2 0 013 19V5A2 2 0 015 3H9"/><polyline points="10 17 15 12 10 7"/></svg>
+            Ver presentación
+          </a>
+        </div>
+      </div>
+
+      <!-- CLASE 2 -->
+      <div class="class-card available">
+        <div class="card-header">
+          <span class="card-num">02</span>
+          <div>
+            <div class="card-date">13 · 04 · 2026</div>
+            <span class="card-badge badge-available">Disponible</span>
+          </div>
+        </div>
+        <div class="card-module">M1 · U2 + U3</div>
+        <div class="card-topic">Elementos Esenciales · Consentimiento</div>
+        <div class="card-contents">Elementos esenciales, naturales y accidentales · Capacidad y sujeto · Objeto del contrato · Precontractualidad · Oferta y Aceptación · Consentimiento electrónico</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://docs.google.com/presentation/d/1SupZmb-GH0rL7wOjgm075f0Z7FxXNErn/edit?usp=sharing" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3H19A2 2 0 0121 5V19A2 2 0 0119 21H5A2 2 0 013 19V5A2 2 0 015 3H9"/><polyline points="10 17 15 12 10 7"/></svg>
+            Ver presentación
+          </a>
+        </div>
+      </div>
+
+      <!-- CLASE 3 -->
+      <div class="class-card available">
+        <div class="card-header">
+          <span class="card-num">03</span>
+          <div>
+            <div class="card-date">20 · 04 · 2026</div>
+            <span class="card-badge badge-available">Disponible</span>
+          </div>
+        </div>
+        <div class="card-module">M1 · U3 + U4</div>
+        <div class="card-topic">Vicios · La Causa en los Contratos</div>
+        <div class="card-contents">Capacidad · Vicios: error, dolo, violencia, lesión, simulación · Causa eficiente y causa final · Presunción, falsedad e ilicitud · Objeto ilícito vs. causa ilícita</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://docs.google.com/presentation/d/159u-35PwF1K_JpUq3uS1Wli12rGHBeds/edit?usp=sharing" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3H19A2 2 0 0121 5V19A2 2 0 0119 21H5A2 2 0 013 19V5A2 2 0 015 3H9"/><polyline points="10 17 15 12 10 7"/></svg>
+            Ver presentación
+          </a>
+        </div>
+      </div>
+
+      <!-- CLASE 4 -->
+      <div class="class-card upcoming">
+        <div class="card-header">
+          <span class="card-num">04</span>
+          <div>
+            <div class="card-date">27 · 04 · 2026</div>
+            <span class="card-badge badge-upcoming">Próximamente</span>
+          </div>
+        </div>
+        <div class="card-module">M2 · U5 + U6</div>
+        <div class="card-topic">Forma · Contratos Atípicos y por Adhesión</div>
+        <div class="card-contents">Libertad de forma y excepciones · Contratos formales solemnes · Boleto de compraventa · Contratos atípicos · Contratos por adhesión · Nuevas formas de contratación</div>
+      </div>
+
+      <!-- CLASE 5 -->
+      <div class="class-card upcoming">
+        <div class="card-header">
+          <span class="card-num">05</span>
+          <div>
+            <div class="card-date">04 · 05 · 2026</div>
+            <span class="card-badge badge-upcoming">Próximamente</span>
+          </div>
+        </div>
+        <div class="card-module">M2 · U7 + U8 + U9</div>
+        <div class="card-topic">Prueba · Interpretación · Efectos</div>
+        <div class="card-contents">Prueba: medios, instrumento público y privado · Interpretación e integración · Efectos entre partes · Principio de intangibilidad · Efectos respecto de terceros</div>
+      </div>
+
+      <!-- CLASE 6 -->
+      <div class="class-card upcoming special">
+        <div class="card-header">
+          <span class="card-num">06</span>
+          <div>
+            <div class="card-date">11 · 05 · 2026</div>
+            <span class="card-badge badge-special">Repaso + M3</span>
+          </div>
+        </div>
+        <div class="card-module">M2 Repaso / M3 · U10 (I)</div>
+        <div class="card-topic">Repaso Integrador · Efectos Bilaterales</div>
+        <div class="card-contents">Repaso M1+M2 · Excepción de incumplimiento · Derecho de retención · Seña y arras · Pacto comisorio</div>
+      </div>
+
+      <!-- PARCIAL 1 -->
+      <div class="class-card exam">
+        <div class="card-header">
+          <span class="card-num">—</span>
+          <div>
+            <div class="card-date">18 · 05 · 2026</div>
+            <span class="card-badge badge-exam">1° Parcial</span>
+          </div>
+        </div>
+        <div class="card-module">Evaluación</div>
+        <div class="card-topic">1° Examen Parcial</div>
+        <div class="card-contents">Módulo 1 completo + Módulo 2 completo (U1–U9) · Concepto, elementos, consentimiento, causa, forma, atipicidad, prueba, interpretación y efectos</div>
+      </div>
+
+      <!-- CLASE 8 -->
+      <div class="class-card upcoming">
+        <div class="card-header">
+          <span class="card-num">08</span>
+          <div>
+            <div class="card-date">25 · 05 · 2026</div>
+            <span class="card-badge badge-upcoming">Próximamente</span>
+          </div>
+        </div>
+        <div class="card-module">M3 · U10 (II)</div>
+        <div class="card-topic">Garantías · Vicios Redhibitorios</div>
+        <div class="card-contents">Garantía de evicción · Presupuestos, extensión y efectos · Vicios redhibitorios · Régimen de caducidad · Vicio oculto en ley del consumidor</div>
+      </div>
+
+      <!-- CLASE 9 -->
+      <div class="class-card upcoming">
+        <div class="card-header">
+          <span class="card-num">09</span>
+          <div>
+            <div class="card-date">01 · 06 · 2026</div>
+            <span class="card-badge badge-upcoming">Próximamente</span>
+          </div>
+        </div>
+        <div class="card-module">M3 · U11 + U12</div>
+        <div class="card-topic">Imprevisión · Extinción del Contrato</div>
+        <div class="card-contents">Pacta sunt servanda vs. rebus sic stantibus · Teoría de la imprevisión · Extinción: nulidad, rescisión, revocación, resolución · Efectos de la resolución</div>
+      </div>
+
+      <!-- CLASE 10 -->
+      <div class="class-card upcoming">
+        <div class="card-header">
+          <span class="card-num">10</span>
+          <div>
+            <div class="card-date">08 · 06 · 2026</div>
+            <span class="card-badge badge-upcoming">Próximamente</span>
+          </div>
+        </div>
+        <div class="card-module">M3 · U13 / M4 · U14 (I)</div>
+        <div class="card-topic">Cuasicontratos · Compraventa (I)</div>
+        <div class="card-contents">Gestión de negocios · Pago de lo indebido · Enriquecimiento sin causa · Compraventa: concepto, unificación, elementos, clasificación y precio</div>
+      </div>
+
+      <!-- FERIADO -->
+      <div class="class-card holiday">
+        <div class="card-header">
+          <span class="card-num">—</span>
+          <div>
+            <div class="card-date">15 · 06 · 2026</div>
+            <span class="card-badge badge-holiday">Feriado</span>
+          </div>
+        </div>
+        <div class="card-module">Sin clase</div>
+        <div class="card-topic">Feriado Nacional</div>
+        <div class="card-contents">No hay clase este lunes.</div>
+      </div>
+
+      <!-- CLASE 11 -->
+      <div class="class-card upcoming">
+        <div class="card-header">
+          <span class="card-num">11</span>
+          <div>
+            <div class="card-date">22 · 06 · 2026</div>
+            <span class="card-badge badge-upcoming">Próximamente</span>
+          </div>
+        </div>
+        <div class="card-module">M4 · U14 (II)</div>
+        <div class="card-topic">Compraventa (II)</div>
+        <div class="card-contents">Obligaciones de las partes · Boleto de compraventa · Tradición de la cosa mueble · Recepción y pago · Maneras especiales · Cláusulas especiales</div>
+      </div>
+
+      <!-- CLASE 12 -->
+      <div class="class-card upcoming special">
+        <div class="card-header">
+          <span class="card-num">12</span>
+          <div>
+            <div class="card-date">29 · 06 · 2026</div>
+            <span class="card-badge badge-special">Repaso + Cierre</span>
+          </div>
+        </div>
+        <div class="card-module">M4 · U15</div>
+        <div class="card-topic">Cesión · Repaso Integrador y Cierre</div>
+        <div class="card-contents">Cesión de créditos · Cesión en garantía · Responsabilidad por evicción · Cesión de deudas · Cesión de la posición contractual · Repaso integrador final</div>
+      </div>
+
+      <!-- PARCIAL 2 -->
+      <div class="class-card exam">
+        <div class="card-header">
+          <span class="card-num">—</span>
+          <div>
+            <div class="card-date">06 · 07 · 2026</div>
+            <span class="card-badge badge-exam">2° Parcial</span>
+          </div>
+        </div>
+        <div class="card-module">Evaluación</div>
+        <div class="card-topic">2° Examen Parcial</div>
+        <div class="card-contents">Módulo 3 completo + Módulo 4 completo (U10–U15) · Efectos bilaterales, revisión, extinción, cuasicontratos, compraventa y cesión de créditos</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CRONOGRAMA ─────────────────────────────────────────────── -->
+  <section id="cronograma">
+    <h2 class="section-title">Cronograma de Cursada</h2>
+    <p class="section-subtitle">Lunes · 4 módulos · 15 unidades · Final a partir del 20/07/2026</p>
+
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Fecha</th>
+          <th>Módulo</th>
+          <th>Contenidos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">01</td><td class="fecha">06/04/2026</td><td class="modulo">M1 · U1</td><td>Concepto de contrato · Clasificación · Autonomía de la voluntad · Unificación civil-comercial</td></tr>
+        <tr><td class="num">02</td><td class="fecha">13/04/2026</td><td class="modulo">M1 · U2+U3</td><td>Elementos esenciales · Capacidad · Objeto · Precontractualidad · Oferta y aceptación · Consentimiento electrónico</td></tr>
+        <tr><td class="num">03</td><td class="fecha">20/04/2026</td><td class="modulo">M1 · U3+U4</td><td>Vicios del contrato · La causa en los contratos · Causa eficiente y causa final · Presunción, falsedad e ilicitud</td></tr>
+        <tr><td class="num">04</td><td class="fecha">27/04/2026</td><td class="modulo">M2 · U5+U6</td><td>Forma · Contratos formales solemnes · Boleto de compraventa · Contratos atípicos y por adhesión</td></tr>
+        <tr><td class="num">05</td><td class="fecha">04/05/2026</td><td class="modulo">M2 · U7+U8+U9</td><td>Prueba · Interpretación e integración · Efectos entre partes · Efectos respecto de terceros</td></tr>
+        <tr class="special-row"><td class="num">06</td><td class="fecha">11/05/2026</td><td class="modulo">M2 Repaso</td><td>Repaso integrador M1+M2 · Excepción de incumplimiento · Retención · Seña y arras · Pacto comisorio</td></tr>
+        <tr class="exam-row"><td class="num">—</td><td class="fecha">18/05/2026</td><td class="modulo">PARCIAL</td><td><strong>1° Examen Parcial</strong> — U1 a U9</td></tr>
+        <tr><td class="num">08</td><td class="fecha">25/05/2026</td><td class="modulo">M3 · U10 (II)</td><td>Garantía de evicción · Vicios redhibitorios · Régimen de caducidad</td></tr>
+        <tr><td class="num">09</td><td class="fecha">01/06/2026</td><td class="modulo">M3 · U11+U12</td><td>Teoría de la imprevisión · Extinción: nulidad, rescisión, revocación, resolución</td></tr>
+        <tr><td class="num">10</td><td class="fecha">08/06/2026</td><td class="modulo">M3·U13/M4·U14</td><td>Cuasicontratos · Compraventa: concepto, unificación, elementos, clasificación y precio</td></tr>
+        <tr class="holiday-row"><td class="num">—</td><td class="fecha">15/06/2026</td><td class="modulo">Feriado</td><td>Sin clase — Feriado nacional</td></tr>
+        <tr><td class="num">11</td><td class="fecha">22/06/2026</td><td class="modulo">M4 · U14 (II)</td><td>Compraventa: obligaciones, boleto, tradición, recepción, maneras especiales y cláusulas especiales</td></tr>
+        <tr class="special-row"><td class="num">12</td><td class="fecha">29/06/2026</td><td class="modulo">M4 · U15</td><td>Cesión de créditos · Cesión en garantía · Cesión de la posición contractual · Repaso integrador y cierre</td></tr>
+        <tr class="exam-row"><td class="num">—</td><td class="fecha">06/07/2026</td><td class="modulo">PARCIAL</td><td><strong>2° Examen Parcial</strong> — U10 a U15</td></tr>
+        <tr class="exam-row"><td class="num">—</td><td class="fecha">13/07/2026</td><td class="modulo">Recuper.</td><td>Recuperatorio — 1° y/o 2° Parcial</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── INFO ───────────────────────────────────────────────────── -->
+  <section id="info">
+    <h2 class="section-title">Información de la Materia</h2>
+    <p class="section-subtitle">Datos generales de la cursada 2026</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-label">Materia</div>
+        <div class="info-card-value">Derecho de los Contratos</div>
+        <div class="info-card-note">Universidad Kennedy</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Docente</div>
+        <div class="info-card-value">Maximiliano Lucas Romei</div>
+        <div class="info-card-note">Abogado · Contador Público</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Clases</div>
+        <div class="info-card-value">Lunes · 4 módulos cátedra</div>
+        <div class="info-card-note">15 unidades temáticas</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">1° Parcial</div>
+        <div class="info-card-value">18 de mayo de 2026</div>
+        <div class="info-card-note">Módulos 1 y 2 — U1 a U9</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">2° Parcial</div>
+        <div class="info-card-value">6 de julio de 2026</div>
+        <div class="info-card-note">Módulos 3 y 4 — U10 a U15</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Examen Final</div>
+        <div class="info-card-value">Desde el 20/07/2026</div>
+        <div class="info-card-note">Recuperatorio: 13/07/2026</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>Derecho de los Contratos · Universidad Kennedy · 2026</strong><br>
+  Maximiliano Lucas Romei · Material de uso exclusivo para estudiantes de la cursada
+</footer>
+
+<script>
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>
