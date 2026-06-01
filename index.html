@@ -59,8 +59,6 @@
       gap: 32px;
     }
 
-    .header-left {}
-
     .header-tag {
       display: inline-block;
       font-family: 'Jost', sans-serif;
@@ -425,6 +423,135 @@
       font-weight: 300;
     }
 
+    /* ── NOTAS TABLE ────────────────────────────────────────────── */
+    .notas-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .notas-stats {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--bordo);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    .notas-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .notas-table th {
+      background: var(--bordo);
+      color: var(--white);
+      font-weight: 500;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      font-size: 10px;
+      padding: 12px 20px;
+      text-align: left;
+    }
+
+    .notas-table th:last-child { text-align: center; }
+
+    .notas-table td {
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--lgray);
+      vertical-align: middle;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .notas-table tr:hover td { background: rgba(107,15,43,.03); }
+
+    .notas-table td.orden {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--bordo);
+      opacity: .35;
+      width: 36px;
+      text-align: center;
+    }
+
+    .notas-table td.nombre {
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .notas-table td.nota-cell {
+      text-align: right;
+      width: 220px;
+    }
+
+    .nota-row-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .nota-bar {
+      flex: 1;
+      height: 4px;
+      background: var(--lgray);
+      border-radius: 2px;
+      overflow: hidden;
+      min-width: 60px;
+    }
+
+    .nota-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--bordo), var(--gold));
+      border-radius: 2px;
+    }
+
+    .nota-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .nota-10 { background: #1A3D1A; color: #6FCF6F; }
+    .nota-9  { background: #1C3A1C; color: #7DD67D; }
+    .nota-8  { background: #2A3D1A; color: #9DD16A; }
+    .nota-7  { background: #3D3A10; color: #D4C44A; }
+    .nota-6  { background: #3D2A10; color: #D4944A; }
+    .nota-5  { background: #3D1A1A; color: #D46A6A; }
+    .nota-low { background: #3D1010; color: #D44444; }
+
     /* ── FOOTER ─────────────────────────────────────────────────── */
     footer {
       background: var(--bordo-dk);
@@ -446,6 +573,8 @@
       .nav-inner { padding: 0 16px; overflow-x: auto; }
       .schedule-table { font-size: 11px; }
       .schedule-table td.modulo { display: none; }
+      .notas-table td.orden { display: none; }
+      .nota-bar { display: none; }
     }
   </style>
 </head>
@@ -476,6 +605,7 @@
   <div class="nav-inner">
     <a href="#clases" class="active">Clases</a>
     <a href="#cronograma">Cronograma</a>
+    <a href="#notas">Notas</a>
     <a href="#info">Información</a>
   </div>
 </nav>
@@ -740,6 +870,135 @@
     </table>
   </section>
 
+  <!-- ── NOTAS 1° PARCIAL ───────────────────────────────────────── -->
+  <section id="notas">
+    <h2 class="section-title">Notas del 1° Parcial</h2>
+    <p class="section-subtitle">Examen del 18/05/2026 · Módulos 1 y 2 · U1 a U9</p>
+
+    <div class="notas-header">
+      <div class="notas-stats">
+        <div class="stat-item">
+          <div class="stat-value">9</div>
+          <div class="stat-label">Alumnos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-prom">—</div>
+          <div class="stat-label">Promedio</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-apro">—</div>
+          <div class="stat-label">Aprobados</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-max">—</div>
+          <div class="stat-label">Nota máx.</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="notas-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Apellido y Nombre</th>
+          <th style="text-align:center">Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="orden">1</td>
+          <td class="nombre">Bentolila, Simon</td>
+          <td class="nota-cell">
+            <div class="nota-row-wrap">
+              <div class="nota-bar"><div class="nota-bar-fill" style="width:100%"></div></div>
+              <span class="nota-badge nota-10">10</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="orden">2</td>
+          <td class="nombre">Braceiro, Roberto</td>
+          <td class="nota-cell">
+            <div class="nota-row-wrap">
+              <div class="nota-bar"><div class="nota-bar-fill" style="width:60%"></div></div>
+              <span class="nota-badge nota-6">6</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="orden">3</td>
+          <td class="nombre">Cabral, Candela</td>
+          <td class="nota-cell">
+            <div class="nota-row-wrap">
+              <div class="nota-bar"><div class="nota-bar-fill" style="width:90%"></div></div>
+              <span class="nota-badge nota-9">9</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="orden">4</td>
+          <td class="nombre">Gutierrez, Jeronimo</td>
+          <td class="nota-cell">
+            <div class="nota-row-wrap">
+              <div class="nota-bar"><div class="nota-bar-fill" style="width:80%"></div></div>
+              <span class="nota-badge nota-8">8</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="orden">5</td>
+          <td class="nombre">Ingegniere, Sofia</td>
+          <td class="nota-cell">
+            <div class="nota-row-wrap">
+              <div class="nota-bar"><div class="nota-bar-fill" style="width:60%"></div></div>
+              <span class="nota-badge nota-6">6</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="orden">6</td>
+          <td class="nombre">Lucher, Sofia</td>
+          <td class="nota-cell">
+            <div class="nota-row-wrap">
+              <div class="nota-bar"><div class="nota-bar-fill" style="width:60%"></div></div>
+              <span class="nota-badge nota-6">6</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="orden">7</td>
+          <td class="nombre">Romano, Alexia</td>
+          <td class="nota-cell">
+            <div class="nota-row-wrap">
+              <div class="nota-bar"><div class="nota-bar-fill" style="width:80%"></div></div>
+              <span class="nota-badge nota-8">8</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="orden">8</td>
+          <td class="nombre">Suarez, Javier</td>
+          <td class="nota-cell">
+            <div class="nota-row-wrap">
+              <div class="nota-bar"><div class="nota-bar-fill" style="width:90%"></div></div>
+              <span class="nota-badge nota-9">9</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="orden">9</td>
+          <td class="nombre">Yegros, Eduardo</td>
+          <td class="nota-cell">
+            <div class="nota-row-wrap">
+              <div class="nota-bar"><div class="nota-bar-fill" style="width:60%"></div></div>
+              <span class="nota-badge nota-6">6</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
   <!-- ── INFO ───────────────────────────────────────────────────── -->
   <section id="info">
     <h2 class="section-title">Información de la Materia</h2>
@@ -808,6 +1067,15 @@
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
   });
+
+  // Compute stats dynamically
+  const notas = [10, 6, 9, 8, 6, 6, 8, 9, 6];
+  const prom = (notas.reduce((a,b) => a+b, 0) / notas.length).toFixed(1);
+  const apro = notas.filter(n => n >= 4).length;
+  const max  = Math.max(...notas);
+  document.getElementById('stat-prom').textContent = prom;
+  document.getElementById('stat-apro').textContent = apro + '/9';
+  document.getElementById('stat-max').textContent  = max;
 </script>
 </body>
 </html>
